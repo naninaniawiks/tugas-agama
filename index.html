@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KUIS_AGAMA</title>
+    <style>
+        .watermark {
+    position: absolute;
+    bottom: 10px; /* Jarak dari bawah halaman */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5em;
+    opacity: 0.5;
+    z-index: 9999;
+}
+
+/* Untuk memberikan efek cyberpunk, Anda dapat menyesuaikan properti warna dan teks sesuai keinginan Anda */
+.watermark::before {
+    content: 'Developed by Erland Agsya';
+    color: #0ff; /* Warna teks watermark */
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+    </style>
+    
     <link rel="stylesheet" href="styleweb.css">
     <!-- Tambahkan link font Orbitron -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
