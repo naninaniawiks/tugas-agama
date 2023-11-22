@@ -6,6 +6,34 @@ body {
     color: #0f0;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Warna latar belakang */
+    color: #fff; /* Warna teks */
+    font-family: 'Courier New', monospace;
+    position: relative;
+    min-height: 100vh;
+}
+
+.watermark {
+    position: absolute;
+    bottom: 10px; /* Jarak dari bawah halaman */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5em;
+    opacity: 0.5;
+    z-index: 9999;
+}
+
+/* Untuk memberikan efek cyberpunk, Anda dapat menyesuaikan properti warna dan teks sesuai keinginan Anda */
+.watermark::before {
+    content: 'Developed by Erland Agsya';
+    color: #0ff; /* Warna teks watermark */
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
 h1 {
     color: #0f0;
 }
