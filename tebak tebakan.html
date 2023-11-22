@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUIS_AGAMA</title>
+    <link rel="stylesheet" href="styleweb.css">
+    <!-- Tambahkan link font Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Kuis Agama</h1>
+    <p>Jawablah 10 pertanyaan berikut:</p>
+
+    <div id="quiz-container"></div>
+    <button id="prev-btn" onclick="prevQuestion()">Soal Sebelumnya</button>
+    <button id="skip-btn" onclick="skipQuestion()">Lewati Soal</button>
+    <div id="result"></div>
+
+    <script>
+        var questions = [
+            { question: '1. Najis mukhoffafah disebut juga?', answer: ['ringan', 'Ringan'], points: 10 },
+            { question: '2. Pengertian thaharah secara istilah adalah bersuci dari najis dan?', answer: ['hadas', 'Hadas'], points: 10 },
+            { question: '3. Suatu yang dapat dilihat, dicium dan dirasakan sehingga menyebabkan seorang muslim terhalang ibadahnya disebut?', answer: ['najis', 'Najis'], points: 10 },
+            { question: '4. Membersihkan kotoran dengan batu saja disebut dengan?', answer: ['istijmar', 'Istijmar'], points: 10 },
+            { question: '5. Najis mughalazzah termasuk kedalam najis?', answer: ['berat', 'Berat'], points: 10 },
+            { question: '6. Air yang mengalami perubahan salah satu sifatnya karena disebabkan bercampur dengan barang suci yang lain disebut?', answer: ['mutaghayar', 'Mutaghayar'], points: 10 },
+            { question: '7. Ulama menyepakati bahwa hukum air mani adalah?', answer: ['suci', 'Suci'], points: 10 },
+            { question: '8. Najis yang tampak wujudnya dan bisa diketahui melalui bau maupun rasanya, najis disebut mutawasitoh?', answer: ['ainiyah', 'Ainiyah'], points: 10 },
+            { question: '9. Dio tidak pernah mandi selama di secata B dikarenakan dio malu mandi bersama laki-laki lain oleh karena itu dia hanya membersihkan badannya dengan tisu basah, apakah sah ibadah dio selama di secata', answer: ['sah', 'Sah'], points: 10 },
+            { question: '10. Jika tidak ada air di suatu daerah, maka bersuci boleh dengan cara?', answer: ['tayammum', 'Tayammum', 'tayamum', 'Tayamum'], points: 10 },
+        ];
+
+        var userAnswers = [];
+        var totalPoints = 0;
+        var currentQuestionIndex = 0;
+        var quizContainer = document.getElementById('quiz-container');
+        var resultContainer = document.getElementById('result');
+
+        function displayQuestion() {
+            var currentQuestion = questions[currentQuestionIndex];
+
+            var questionElement = document.createElement('p');
+            questionElement.textContent = currentQuestion.question;
+
+            var inputElement = document.createElement('input');
+            inputElement.type = 'text';
+            inputElement.id = 'userAnswer';
+            inputElement.value = userAnswers[currentQuestionIndex] || '';
+            inputElement.addEventListener('input', function(event) {
+                if (event.target.value.length >= currentQuestion.answer[0].length) {
+                    nextQuestion();
+                }
+            });
+
+            var container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            container.appendChild(questionElement);
+            container.appendChild(inputElement);
+
+            setTimeout(function() {
+                quizContainer.classList.add('fade-in');
+            }, 100);
+        }
+
+        function nextQuestion() {
+            var userAnswer = document.getElementById('userAnswer').value.toLowerCase();
+            userAnswers[currentQuestionIndex] = userAnswer;
+
+            var currentQuestion = questions[currentQuestionIndex];
+
+            if (currentQuestion.answer.some(correctAnswer => userAnswer === correctAnswer.toLowerCase())) {
+                totalPoints += currentQuestion.points;
+            } else {
+                totalPoints -= currentQuestion.points;
+            }
+
+            currentQuestionIndex++;
+
+            quizContainer.classList.remove('fade-in');
+            quizContainer.classList.add('fade-out');
+
+            setTimeout(function() {
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                    quizContainer.classList.remove('fade-out');
+                } else {
+                    showResult();
+                }
+            }, 500);
+        }
+
+        function showResult() {
+            var resultMessage = (totalPoints >= 75) ?
+                                'Selamat! Anda tuntas menjawab kuis dengan total poin ' + totalPoints + '.' :
+                                'Maaf, Anda belum mencapai total poin yang diperlukan. Total poin Anda: ' + totalPoints;
+
+            var resultElement = document.createElement('p');
+            resultElement.textContent = resultMessage;
+            resultContainer.innerHTML = '';
+            resultContainer.appendChild(resultElement);
+
+            // Menonaktifkan semua fitur setelah nilai akhir keluar
+            document.getElementById('prev-btn').disabled = true;
+            document.getElementById('skip-btn').disabled = true;
+            document.getElementById('userAnswer').disabled = true;
+        }
+
+        function skipQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>

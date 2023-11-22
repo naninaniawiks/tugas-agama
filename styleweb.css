@@ -1,0 +1,76 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    margin: 50px;
+    background-color: #000;
+    color: #0f0;
+}
+
+h1 {
+    color: #0f0;
+}
+
+p {
+    color: #0f0;
+}
+
+#name-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#quiz-container {
+    background-color: #111;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+input {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #111;
+    color: #0f0;
+    border: 1px solid #0f0;
+}
+
+.fade-in {
+    opacity: 1 !important;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+#skip-btn, #prev-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #1e90ff; /* Warna biru elektrik */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+#skip-btn:hover, #prev-btn:hover {
+    background-color: #00ff00; /* Warna hijau neon */
+}
+
+#result {
+    margin-top: 20px;
+    color: #0f0;
+}
+
+#chart-container {
+    margin-top: 20px;
+    display: none;
+}
